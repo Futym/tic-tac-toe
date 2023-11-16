@@ -1,11 +1,12 @@
 import { useState } from "react";
 
-export const Player = ({ name, symbol, isActive }) => {
-  const [isEdited, setIsEdited] = useState(false);
+export const Player = ({ name, symbol, isActive, changePlayer }) => {
+  const [isEditing, setIsEdited] = useState(false);
   const [playerName, setPlayerName] = useState(name);
 
   const handleEditClick = () => {
-    setIsEdited((editing) => !editing);
+      setIsEdited((editing) => !editing);
+      isEditing && changePlayer(symbol, playerName)
   };
 
   const handleNameChange = (event) => {
@@ -14,7 +15,7 @@ export const Player = ({ name, symbol, isActive }) => {
 
   let playerNameElement = <span className="player-name">{playerName}</span>;
 
-  if (isEdited) {
+  if (isEditing) {
     playerNameElement = (
       <input
         type="text"
@@ -31,7 +32,7 @@ export const Player = ({ name, symbol, isActive }) => {
         {playerNameElement}
         <span className="player-symbol">{symbol}</span>
       </span>
-      <button onClick={handleEditClick}>{isEdited ? "Save" : "Edit"}</button>
+      <button onClick={handleEditClick}>{isEditing ? "Save" : "Edit"}</button>
     </li>
   );
 };

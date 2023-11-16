@@ -1,19 +1,8 @@
-const initialBoardGame = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-];
+export const GameBoard = ({ onSquareSelect, board }) => {
 
-export const GameBoard = ({ onSquareSelect, turns }) => {
-  let boardGame = initialBoardGame;
-
-  for (const turn of turns) {
-    const { square, player } = turn;
-    boardGame[square.row][square.col] = player;
-  }
   return (
     <ol id="game-board">
-      {boardGame.map((row, rowIndex) => (
+      {board.map((row, rowIndex) => (
         <li key={rowIndex}>
           <ol>
             {row.map((playerSymbol, colIndex) => (
